@@ -98,12 +98,12 @@ export const ANTIGRAVITY_IDE_USER_AGENT = `antigravity/hub/${ANTIGRAVITY_IDE_VER
 
 // Antigravity OAuth client credentials (public CLI client — duplicated in usage.js + src/lib/oauth)
 export const ANTIGRAVITY_OAUTH_CLIENT = {
-  clientId: "YOUR_GOOGLE_OAUTH_CLIENT_ID",
-  clientSecret: "YOUR_GOOGLE_OAUTH_CLIENT_SECRET"
+  clientId: (typeof process !== "undefined" && process.env.GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_ID) || "YOUR_GOOGLE_OAUTH_CLIENT_ID",
+  clientSecret: (typeof process !== "undefined" && process.env.GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_SECRET) || "YOUR_GOOGLE_OAUTH_CLIENT_SECRET"
 };
 
 // Gemini (Google) OAuth client credentials (public CLI client — shared by gemini, gemini-cli, src/lib/oauth)
 export const GOOGLE_OAUTH_CLIENT = {
-  clientId: "YOUR_GOOGLE_OAUTH_CLIENT_ID",
-  clientSecret: "YOUR_GOOGLE_OAUTH_CLIENT_SECRET"
+  clientId: (typeof process !== "undefined" && process.env.GODROUTER_GOOGLE_OAUTH_CLIENT_ID) || "YOUR_GOOGLE_OAUTH_CLIENT_ID",
+  clientSecret: (typeof process !== "undefined" && process.env.GODROUTER_GOOGLE_OAUTH_CLIENT_SECRET) || "YOUR_GOOGLE_OAUTH_CLIENT_SECRET"
 };

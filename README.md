@@ -33,6 +33,15 @@ Data from an existing 9Router install does **not** migrate automatically. To car
 
 Some links in this README (badges, website, Docker image, donation) still point to the upstream 9Router project. They stay as upstream attribution until the GodRouter repository and npm package are created, at which point they should be updated to the GodRouter ones.
 
+### OAuth credentials via environment variables
+
+Upstream Google OAuth client values are NOT shipped in this fork (GitHub push protection blocks them). Gemini and Antigravity OAuth read their client ID/secret from the environment instead, falling back to placeholders when unset:
+
+- `GODROUTER_GOOGLE_OAUTH_CLIENT_ID` / `GODROUTER_GOOGLE_OAUTH_CLIENT_SECRET`
+- `GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_ID` / `GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_SECRET`
+
+Set them in your local `.env` or server environment with your own Google Cloud OAuth client credentials (see `.env.example`). Never commit real values to git — with placeholders only, those two OAuth logins will not work.
+
 ---
 ## 🤔 Why GodRouter?
 

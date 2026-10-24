@@ -41,8 +41,8 @@ export default {
       loadProjectApiUrl: "https://cloudcode-pa.googleapis.com/v1internal:loadCodeAssist",
       tokenUrl: "https://oauth2.googleapis.com/token",
     },
-    clientId: "YOUR_GOOGLE_OAUTH_CLIENT_ID",
-    clientSecret: "YOUR_GOOGLE_OAUTH_CLIENT_SECRET",
+    clientId: (typeof process !== "undefined" && process.env.GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_ID) || "YOUR_GOOGLE_OAUTH_CLIENT_ID",
+    clientSecret: (typeof process !== "undefined" && process.env.GODROUTER_ANTIGRAVITY_OAUTH_CLIENT_SECRET) || "YOUR_GOOGLE_OAUTH_CLIENT_SECRET",
   },
   models: [
     { id: "gemini-4-argon-high", name: "Gemini 4 Argon (High)", upstreamModelId: "gemini-4-argon-high(high)" },
