@@ -1,29 +1,29 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import { GITHUB_CONFIG } from "@/shared/constants/config";
+
+// GodRouter donations go to the fork maintainer (Ko-fi), not upstream.
+// Static on purpose: no external fetch, so the modal never shows upstream channels.
+const DONATE_DATA = {
+  title: "Support GodRouter",
+  message: "Support GodRouter development — donations go directly to the maintainer.",
+  channels: [
+    {
+      id: "kofi",
+      label: "Ko-fi",
+      description: "Support via Ko-fi",
+      icon: "volunteer_activism",
+      color: "#FF5E5B",
+      url: "https://ko-fi.com/preangerdev",
+    },
+  ],
+};
 
 export default function DonateModal({ isOpen, onClose }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const data = DONATE_DATA;
   const modalRef = useRef(null);
-
-  useEffect(() => {
-    if (!isOpen || data) return;
-    setLoading(true);
-    setError("");
-    fetch(GITHUB_CONFIG.donateUrl, { cache: "no-store" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((json) => setData(json))
-      .catch((err) => setError(err.message || "Failed to load"))
-      .finally(() => setLoading(false));
-  }, [isOpen, data]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -59,27 +59,14 @@ export default function DonateModal({ isOpen, onClose }) {
         </div>
 
         <div className="p-6 overflow-y-auto flex-1">
-          {loading && (
-            <div className="flex items-center justify-center py-10 text-text-muted">
-              <span className="material-symbols-outlined animate-spin mr-2">progress_activity</span>
-              Loading...
-            </div>
+          {data.message && (
+            <p className="text-text-muted text-sm mb-6 text-center">{data.message}</p>
           )}
-          {error && (
-            <div className="text-red-500 py-4">Failed to load donate info: {error}</div>
-          )}
-          {!loading && !error && data && (
-            <>
-              {data.message && (
-                <p className="text-text-muted text-sm mb-6 text-center">{data.message}</p>
-              )}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {data.channels?.map((ch) => (
-                  <DonateChannelCard key={ch.id} channel={ch} />
-                ))}
-              </div>
-            </>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {data.channels?.map((ch) => (
+              <DonateChannelCard key={ch.id} channel={ch} />
+            ))}
+          </div>
         </div>
       </div>
     </div>,

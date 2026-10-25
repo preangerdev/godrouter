@@ -10,7 +10,7 @@ export const APP_CONFIG = {
 // GitHub configuration
 export const GITHUB_CONFIG = {
   changelogUrl: "https://raw.githubusercontent.com/decolua/9router/refs/heads/master/CHANGELOG.md",
-  donateUrl: "https://9router.com/api/donate",
+  // Donations are static in DonateModal.js (Ko-fi, fork maintainer). No upstream donate URL.
 };
 
 // Updater configuration
@@ -35,7 +35,7 @@ export const UPDATER_CONFIG = {
 // Theme configuration
 export const THEME_CONFIG = {
   storageKey: "theme",
-  defaultTheme: "system", // "light" | "dark" | "system"
+  defaultTheme: "light", // "light" | "dark" | "system" — GodRouter Light Clean default
 };
 
 // Subscription
